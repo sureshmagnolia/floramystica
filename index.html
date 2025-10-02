@@ -27,6 +27,8 @@
         .feedback-text { font-style: italic; font-weight: bold; }
         .feedback-correct { color: #2e8b57; }
         .feedback-incorrect { color: #d9534f; }
+        .countdown-text { color: #d9534f; font-weight: bold; margin: 10px 0; }
+        .daily-info { background-color: #fffacd; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ffd700; }
 
         #result-screen, #loading-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -42,7 +44,7 @@
             to { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
-        /* --- NEW: Loading Animation Styles --- */
+        /* --- Loading Animation Styles --- */
         @property --progress-angle {
           syntax: '<angle>';
           inherits: false;
@@ -74,6 +76,7 @@
     <div class="game-container">
         <h1>Flora Mystica: The Magical Path</h1>
         <div id="score-display">Score: 0</div>
+        <div id="daily-info" class="daily-info" style="display:none;"></div>
         <div id="story-area" class="story-text">Loading game data...</div>
         <div id="riddle-area" class="riddle-text" style="display:none;"></div>
         <div id="game-controls">
@@ -86,6 +89,7 @@
             <button id="submit-button" style="display:none;">Submit Answer</button>
         </div>
         <div id="feedback-area" class="feedback-text"></div>
+        <div id="countdown-area" class="countdown-text" style="display:none;"></div>
 
         <div id="result-screen" style="display:none;">
             <div id="analysing-state">
@@ -106,31 +110,148 @@
 
     <script>
         const DATA_URL = 'https://raw.githubusercontent.com/sureshmagnolia/floramystica/main/quests.json';
+        const TIMEZONE_OFFSET = 5.5; // GMT+5:30
+        const DAILY_RESET_HOUR = 6; // 6:00 AM
         
         let currentLevel = 1, isGameActive = true, score = 0, allQuests = [], plantFamilies = [];
         const praiseMessages = [
             "Brilliant! ✨ You've earned a Petal of Power!", "Amazing! 🌿 Another magical petal is yours!", "Incredible! 🌸 The Grand Tree accepts your offering!", "Excellent! 🌳 You retrieve a glowing petal!", "Perfect! 🌟 A Petal of Power has been won!", "Flawless! The botanical secrets are yours to command!", "Magnificent! Another guardian is bested! A petal appears!", "Your knowledge shines! You've claimed another petal! 💡", "Sublime! The essence of the flower is revealed to you! 🌺", "The shadow trembles before your skill! A petal is yours!", "A true master of flora! You've won another petal! 🍃", "The Grand Tree's roots grow stronger with your wisdom! 💪", "Stunning! The kingdom's hope is restored!", "Your connection to the flora is powerful! A petal is your reward!", "You are the champion the Garden Kingdom needs! 🏆"
         ];
         
-        const scoreDisplay = document.getElementById('score-display'), storyArea = document.getElementById('story-area'), riddleArea = document.getElementById('riddle-area'), gameControls = document.getElementById('game-controls'), autocompleteContainer = document.getElementById('autocomplete-container'), answerInput = document.getElementById('answer-input'), autocompleteResults = document.getElementById('autocomplete-results'), startScreenControls = document.getElementById('start-screen-controls'), submitButton = document.getElementById('submit-button'), nextLevelButton = document.getElementById('next-level-button'), feedbackArea = document.getElementById('feedback-area'), resultScreen = document.getElementById('result-screen'), analysingState = document.getElementById('analysing-state'), correctState = document.getElementById('correct-state'), resultPraise = document.getElementById('result-praise'), loadingOverlay = document.getElementById('loading-overlay');
+        const scoreDisplay = document.getElementById('score-display'),
+              dailyInfo = document.getElementById('daily-info'),
+              storyArea = document.getElementById('story-area'),
+              riddleArea = document.getElementById('riddle-area'),
+              gameControls = document.getElementById('game-controls'),
+              autocompleteContainer = document.getElementById('autocomplete-container'),
+              answerInput = document.getElementById('answer-input'),
+              autocompleteResults = document.getElementById('autocomplete-results'),
+              startScreenControls = document.getElementById('start-screen-controls'),
+              submitButton = document.getElementById('submit-button'),
+              nextLevelButton = document.getElementById('next-level-button'),
+              feedbackArea = document.getElementById('feedback-area'),
+              countdownArea = document.getElementById('countdown-area'),
+              resultScreen = document.getElementById('result-screen'),
+              analysingState = document.getElementById('analysing-state'),
+              correctState = document.getElementById('correct-state'),
+              resultPraise = document.getElementById('result-praise'),
+              loadingOverlay = document.getElementById('loading-overlay');
 
-        function updateScore(newScore) { score = newScore; scoreDisplay.textContent = `Score: ${score}`; localStorage.setItem('floraMysticaScore', score); }
+        // --- NEW: Daily Progress Functions ---
+        function getCurrentISTDate() {
+            const now = new Date();
+            // Convert to IST (GMT+5:30)
+            const istTime = new Date(now.getTime() + (TIMEZONE_OFFSET * 60 * 60 * 1000));
+            return istTime;
+        }
+
+        function getDailyKey() {
+            const istDate = getCurrentISTDate();
+            return `daily_${istDate.getFullYear()}-${istDate.getMonth() + 1}-${istDate.getDate()}`;
+        }
+
+        function canPlayNextLevel() {
+            const savedProgress = localStorage.getItem('floraMysticaDailyProgress');
+            if (!savedProgress) return true;
+            
+            const progress = JSON.parse(savedProgress);
+            const currentKey = getDailyKey();
+            
+            // If it's a new day, reset progress
+            if (progress.dateKey !== currentKey) {
+                return true;
+            }
+            
+            // Check if user has already completed today's level
+            return !progress.completed;
+        }
+
+        function markDailyComplete() {
+            const progress = {
+                dateKey: getDailyKey(),
+                completed: true,
+                completedAt: new Date().toISOString(),
+                level: currentLevel
+            };
+            localStorage.setItem('floraMysticaDailyProgress', JSON.stringify(progress));
+        }
+
+        function getNextAvailableTime() {
+            const now = getCurrentISTDate();
+            const nextDay = new Date(now);
+            
+            // Set to next day 6:00 AM IST
+            nextDay.setDate(nextDay.getDate() + 1);
+            nextDay.setHours(DAILY_RESET_HOUR, 0, 0, 0);
+            
+            return nextDay;
+        }
+
+        function updateCountdown() {
+            const nextAvailable = getNextAvailableTime();
+            const now = getCurrentISTDate();
+            const diff = nextAvailable - now;
+            
+            if (diff <= 0) {
+                countdownArea.style.display = 'none';
+                return true;
+            }
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            countdownArea.textContent = `Next puzzle available in: ${hours}h ${minutes}m ${seconds}s`;
+            countdownArea.style.display = 'block';
+            
+            return false;
+        }
+
+        function updateScore(newScore) { 
+            score = newScore; 
+            scoreDisplay.textContent = `Score: ${score}`; 
+            localStorage.setItem('floraMysticaScore', score); 
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             fetch(DATA_URL).then(response => response.json()).then(data => {
                 allQuests = data;
                 plantFamilies = [...new Set(allQuests.map(q => q.answer))].sort();
                 initializeGameUI();
-            }).catch(error => { console.error("Failed to load quest data:", error); storyArea.innerHTML = "<h3>Error</h3><p>Could not load essential game data. Please refresh.</p>"; });
+            }).catch(error => { 
+                console.error("Failed to load quest data:", error); 
+                storyArea.innerHTML = "<h3>Error</h3><p>Could not load essential game data. Please refresh.</p>"; 
+            });
         });
 
         function initializeGameUI() {
-            const savedLevel = localStorage.getItem('floraMysticaLevel'), savedScore = localStorage.getItem('floraMysticaScore');
-            if (savedScore) { score = parseInt(savedScore, 10) || 0; scoreDisplay.textContent = `Score: ${score}`; }
+            const savedScore = localStorage.getItem('floraMysticaScore');
+            if (savedScore) { 
+                score = parseInt(savedScore, 10) || 0; 
+                scoreDisplay.textContent = `Score: ${score}`; 
+            }
 
+            // Check daily progress
+            const savedProgress = localStorage.getItem('floraMysticaDailyProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                const currentKey = getDailyKey();
+                
+                if (progress.dateKey === currentKey && progress.completed) {
+                    // Already completed today's puzzle
+                    showDailyCompletedScreen(progress.level);
+                    return;
+                }
+            }
+
+            // Start countdown timer if needed
+            setInterval(updateCountdown, 1000);
+            
+            // Continue with normal initialization
+            const savedLevel = localStorage.getItem('floraMysticaLevel');
             if (savedLevel && parseInt(savedLevel, 10) > 1) {
                 currentLevel = parseInt(savedLevel, 10);
-                storyArea.innerHTML = `<h3>Welcome Back, Adventurer!</h3><p>Your quest awaits at Level ${currentLevel}.</p>`;
+                storyArea.innerHTML = `<h3>Welcome Back, Adventurer!</h3><p>Your daily quest awaits at Level ${currentLevel}.</p>`;
                 startScreenControls.innerHTML = `<button id="continue-button" class="control-button">Continue Quest</button><button id="restart-button" class="control-button">Start New Quest</button>`;
                 document.getElementById('continue-button').addEventListener('click', () => startGame(false));
                 document.getElementById('restart-button').addEventListener('click', () => startGame(true));
@@ -140,22 +261,67 @@
                 document.getElementById('start-button').addEventListener('click', () => startGame(true));
             }
         }
+
+        function showDailyCompletedScreen(completedLevel) {
+            dailyInfo.style.display = 'block';
+            dailyInfo.innerHTML = `<h3>🎉 Daily Quest Complete!</h3><p>You've successfully completed today's botanical challenge (Level ${completedLevel}).</p><p>Return tomorrow at 6:00 AM IST for a new puzzle!</p>`;
+            
+            storyArea.style.display = 'none';
+            riddleArea.style.display = 'none';
+            gameControls.style.display = 'none';
+            
+            // Show countdown to next puzzle
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            startScreenControls.innerHTML = `<button id="view-stats" class="control-button">View Statistics</button>`;
+            startScreenControls.style.display = 'block';
+            document.getElementById('view-stats').addEventListener('click', showStatistics);
+        }
+
+        function showStatistics() {
+            const savedProgress = localStorage.getItem('floraMysticaDailyProgress');
+            const savedScore = localStorage.getItem('floraMysticaScore');
+            
+            storyArea.innerHTML = `
+                <h3>Your Botanical Journey</h3>
+                <p><strong>Total Score:</strong> ${savedScore || 0}</p>
+                <p><strong>Current Level:</strong> ${currentLevel}</p>
+                ${savedProgress ? `<p><strong>Today's Progress:</strong> Completed Level ${JSON.parse(savedProgress).level}</p>` : ''}
+                <p>Keep exploring the magical world of flora!</p>
+            `;
+            storyArea.style.display = 'block';
+        }
         
         function showMainStory() {
             storyArea.innerHTML = '<h3>The Garden Kingdom</h3><p>In a land far removed from the mundanities of our world exists the Garden Kingdom...</p><h3>The Grand Tree of Lore</h3><p>At the heart of this realm stands the Grand Tree of Lore...</p><h3>A Shadow Falls</h3><p>But not all is well in this verdant paradise...</p><h3>The Quest for the Petals of Power</h3><p>Ancient scrolls reveal that only the legendary "Petals of Power" can restore the Tree...</p><h3>A Call to Adventure</h3><p>Using the last remnants of its power, the Grand Tree sends out a call for help, and so begins your saga.</p>';
         }
 
         function startGame(isNewGame) {
-            if (isNewGame) { currentLevel = 1; localStorage.removeItem('floraMysticaLevel'); localStorage.removeItem('floraMysticaScore'); updateScore(0); }
+            if (isNewGame) { 
+                currentLevel = 1; 
+                localStorage.removeItem('floraMysticaLevel'); 
+                localStorage.removeItem('floraMysticaScore'); 
+                localStorage.removeItem('floraMysticaDailyProgress');
+                updateScore(0); 
+            }
             startScreenControls.style.display = 'none';
+            dailyInfo.style.display = 'none';
             fetchRiddle(currentLevel);
         }
 
         function fetchRiddle(level) {
+            // Check if user can play this level today
+            if (!canPlayNextLevel()) {
+                showDailyCompletedScreen(level);
+                return;
+            }
+
             const quest = allQuests.find(q => q.level === level);
             if (!quest) {
                 storyArea.innerHTML = `<strong>Congratulations! You are victorious!</strong><br>With a final score of ${score}, you have saved the Garden Kingdom! 🏆`;
-                riddleArea.style.display = 'none'; gameControls.style.display = 'none';
+                riddleArea.style.display = 'none'; 
+                gameControls.style.display = 'none';
                 startScreenControls.innerHTML = `<button id="restart-button" class="control-button">Play Again</button>`;
                 startScreenControls.style.display = 'block';
                 document.getElementById('restart-button').addEventListener('click', () => startGame(true));
@@ -173,6 +339,7 @@
             answerInput.value = '';
             answerInput.focus();
             feedbackArea.textContent = '';
+            countdownArea.style.display = 'none';
             isGameActive = true;
         }
         
@@ -182,20 +349,31 @@
             const quest = allQuests.find(q => q.level === currentLevel);
             if (!userAnswer || !quest) { isGameActive = true; return; }
             
-            autocompleteResults.style.display = 'none'; riddleArea.style.display = 'none'; gameControls.style.display = 'none'; feedbackArea.style.display = 'none';
-            resultScreen.style.display = 'flex'; analysingState.style.display = 'block'; correctState.style.display = 'none';
+            autocompleteResults.style.display = 'none'; 
+            riddleArea.style.display = 'none'; 
+            gameControls.style.display = 'none'; 
+            feedbackArea.style.display = 'none';
+            resultScreen.style.display = 'flex'; 
+            analysingState.style.display = 'block'; 
+            correctState.style.display = 'none';
 
             setTimeout(() => {
                 if (userAnswer.toLowerCase().trim() === quest.answer.toLowerCase().trim()) {
                     updateScore(score + 10);
                     resultPraise.textContent = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
                     currentLevel++;
+                    
+                    // Mark daily progress as complete
+                    markDailyComplete();
+                    
                     analysingState.style.display = 'none';
                     correctState.style.display = 'block';
                 } else {
                     updateScore(score - 5);
                     resultScreen.style.display = 'none';
-                    riddleArea.style.display = 'block'; gameControls.style.display = 'block'; feedbackArea.style.display = 'block';
+                    riddleArea.style.display = 'block'; 
+                    gameControls.style.display = 'block'; 
+                    feedbackArea.style.display = 'block';
                     feedbackArea.className = 'feedback-text feedback-incorrect';
                     feedbackArea.textContent = `🤔 Not quite. Here's a hint: ${quest.hint}`;
                     isGameActive = true;
@@ -208,15 +386,13 @@
         submitButton.addEventListener('click', () => { if (isGameActive) checkAnswer(); });
         answerInput.addEventListener('keydown', (event) => { if (event.key === 'Enter' && isGameActive) checkAnswer(); });
         
-        // --- MODIFIED: Event listener for "Next Level" button now includes animation ---
         nextLevelButton.addEventListener('click', () => {
             resultScreen.style.display = 'none';
             loadingOverlay.style.display = 'flex';
             
-            // This resets the CSS animation so it can run again
             const loader = document.querySelector('.loader-circle');
             loader.style.animation = 'none';
-            loader.offsetHeight; // Trigger reflow
+            loader.offsetHeight;
             loader.style.animation = 'load-progress 2s linear forwards';
 
             setTimeout(() => {
@@ -227,19 +403,33 @@
         });
 
         answerInput.addEventListener('input', () => {
-            const inputValue = answerInput.value; autocompleteResults.innerHTML = '';
-            if (inputValue.length < 3) { autocompleteResults.style.display = 'none'; return; }
+            const inputValue = answerInput.value; 
+            autocompleteResults.innerHTML = '';
+            if (inputValue.length < 3) { 
+                autocompleteResults.style.display = 'none'; 
+                return; 
+            }
             const suggestions = plantFamilies.filter(f => f.toLowerCase().startsWith(inputValue.toLowerCase()));
             if (suggestions.length > 0) {
                 suggestions.slice(0, 10).forEach(suggestion => {
-                    const item = document.createElement('div'); item.textContent = suggestion;
-                    item.addEventListener('click', () => { answerInput.value = suggestion; autocompleteResults.style.display = 'none'; });
+                    const item = document.createElement('div'); 
+                    item.textContent = suggestion;
+                    item.addEventListener('click', () => { 
+                        answerInput.value = suggestion; 
+                        autocompleteResults.style.display = 'none'; 
+                    });
                     autocompleteResults.appendChild(item);
                 });
                 autocompleteResults.style.display = 'block';
-            } else { autocompleteResults.style.display = 'none'; }
+            } else { 
+                autocompleteResults.style.display = 'none'; 
+            }
         });
-        document.addEventListener('click', (e) => { if (!autocompleteContainer.contains(e.target)) { autocompleteResults.style.display = 'none'; } });
+        document.addEventListener('click', (e) => { 
+            if (!autocompleteContainer.contains(e.target)) { 
+                autocompleteResults.style.display = 'none'; 
+            } 
+        });
     </script>
 </body>
 </html>
