@@ -1,275 +1,373 @@
 [
   {
     "level": 1,
-    "riddle": "In the realm where I reside,\nIn nature's grace, I take my pride.\nMy leaves are simple, ever true,\nIn pairs they grow, as if they knew.\nA stem so strong, quadrangular grace,\nA testament to nature's embrace.\nWith flowers zygomorphic, they bloom,\nIn intricate patterns, they consume.\nBorn on panicles, terminal and bold,\nA sight to behold, a story untold.\nIn harmony, they dance and sway,\nTheir symphony of colors on display.\nIn every season, I stand tall,\nA portrait of beauty, I enthrall.\nOpposite leaves, a hallmark sign,\nA member of flora's grand design.",
+    "riddle": "In the realm where I reside,\nIn nature's grace, I take my pride.\nMy leaves are simple, ever true,\nIn pairs they grow, as if they knew.\nA stem so strong, quadrangular grace,\nA testament to nature's embrace.",
     "hint": "A popular tea made from this family is known for its citrusy, calming aroma.",
     "answer": "Verbenaceae",
-    "storyText": "Greetings, adventurer! To pass through this first door, you must correctly answer my question. A magical petal will be your reward, granting you passage to the wonders that lie beyond."
+    "storyText": "Greetings, adventurer! To pass through this first door, you must correctly answer my question."
   },
   {
     "level": 2,
-    "riddle": "In the kingdom of climbers, I thrive,\nA family with wonders, where climbers arrive.\nMy flowers, unique, a single sex they hold,\nMale, Syngenesia they unfold.\nOr female they bloom, with carpels free,\nIn nature's dance, a sight to see.\nIn threes, my petals grace the air,\nA delicate trio, beyond compare.\nAmidst the vines, I find my way,\nTo climb and reach the light of day.\nWith petals three and secrets deep,\nMy family's legacy, a treasure to keep.",
-    "hint": "The seeds of some species in this family are shaped like a crescent moon.",
+    "riddle": "In the kingdom of climbers, I thrive,\nA woody vine, where secrets arrive.\nMy flowers are small, a single sex they hold,\nOn different plants, a story is told.\nFemale blooms with carpels free,\nIn nature's dance, for all to see.\nIn threes my petals grace the air,\nA delicate trio, beyond compare.\nWith a crescent moon seed, a treasure to keep, 🌙\nMy family's legacy, buried deep.",
+    "hint": "The unique shape of this family's seed is a key identifying feature.",
     "answer": "Menispermaceae",
-    "storyText": "You see another door, older and more mysterious than the first. Next to it is a wiggling climber with a sneaky vibe. It says, \"Ah, you made it past the first door! That was easy, wasn't it? Now, get ready for a harder riddle.\""
+    "storyText": "You see another door, older and more mysterious than the first. It says, \"Ah, you made it past the first door! Now, get ready for a harder riddle.\""
   },
   {
     "level": 3,
-    "riddle": "In the earth, my roots dig deep,\nA fragrance lingers, a memory to keep.\nLeaves, simple and in line they stand,\nAlternating grace across the land.\nMy flowers, cunning, they may seem,\nResembling pea family gleam.\nBut look closer, and you'll discern,\nA trick of nature, a twist to learn.\nTwo fused carpels, a union secure,\nOvules on axis, life's allure.\nAnd in my seeds, a special prize,\nAn aril cloak, a cherished guise.",
+    "riddle": "In the earth, my roots dig deep,\nA fragrance lingers, a memory to keep.\nMy flowers, cunning, they may seem,\nResembling pea family gleam.\nBut look closer, and you'll discern,\nA trick of nature, a twist to learn.",
     "hint": "This family's name means 'much milk', though it has nothing to do with lactation.",
     "answer": "Polygalaceae",
-    "storyText": "Before you stands the grandest door yet, shimmering as if woven from moonbeams and stardust. An herb with a mystic aroma begins to sing its question, \"Solve it, and the petals of power shall be yours.\""
+    "storyText": "Before you stands the grandest door yet, shimmering as if woven from moonbeams and stardust."
   },
   {
     "level": 4,
-    "riddle": "Amidst the meadows, I hold my sway,\nMy flowers beckon, they brighten your day.\nPerianth whorls, both I possess,\nWith petals free, in nature's finesse.\nHypogynous blooms, they gracefully stand,\nCarpels fused, a secret grand.\nActinomorphic beauty, a symmetrical embrace,\nIn perfect form, they find their place.\nBasal or free central, my placentation's call,\nPetals deeply divided or fringed, enthralling all.",
+    "riddle": "Amidst the meadows, I hold my sway,\nMy flowers beckon, they brighten your day.\nPetals deeply divided or fringed, enthralling all.",
     "hint": "Think of the flower often given as a gift, known for its ruffled petals and long-lasting bloom.",
     "answer": "Caryophyllaceae",
-    "storyText": "You now stand before the Door of Eclipses, a gateway that shimmers in otherworldly light. Guarding it is a flora with petals that seem to hold the night sky within them. It breaks into a haunting lullaby."
+    "storyText": "You now stand before the Door of Eclipses, a gateway that shimmers in otherworldly light."
   },
   {
     "level": 5,
-    "riddle": "I'm, real queen of flora, ancient and divine,\nMy ancestry traces back to the dawn of time.\nThe first to bloom, in nature's grand design,\nA regal presence, in every clime.\nAs trees with leaves, in patterns alternate,\nMy beauty reigns, it does captivate.\nFragrant flowers, in spirals they create,\nA symphony of scents, a heavenly trait.\nCarpels free, in chambers they reside,\nA secret within, they gently hide.",
+    "riddle": "I'm, real queen of flora, ancient and divine,\nMy ancestry traces back to the dawn of time.\nFragrant flowers, in spirals they create,\nA symphony of scents, a heavenly trait.",
     "hint": "I am considered one of the most primitive of all the flowering plants.",
     "answer": "Magnoliaceae",
-    "storyText": "You find yourselves before the Door of Echoes, a portal with mirrors that reflect thoughts. Its ethereal plant guardian begins to sing, its haunting refrain echoing through the Whispering Woods."
+    "storyText": "You find yourselves before the Door of Echoes, a portal with mirrors that reflect thoughts."
   },
   {
     "level": 6,
-    "riddle": "In a garden so bright, under the sun's golden gleam,\nWith perianth whorls both present, a flower's secret theme.\nPetals so free, like birds taking flight,\nI'm hypogynous, yes, sitting so fair,\nWith carpels fused tightly, a mystery to share.\nActinomorphic, my shape so divine,\nAxile's my placentation, where my seeds lay to rest,\nStamens fused in a tube, I surely am blessed.",
+    "riddle": "In a garden so bright, under the sun's golden gleam,\nStamens fused in a tube, I surely am blessed.",
     "hint": "The world's most popular sweet treat comes from a tree in this family.",
     "answer": "Sterculiaceae",
-    "storyText": "The Door of Aetherial Veils is before you, draped in an aura as elusive as moonbeams. The plant guarding this door has an aura that even witches would envy, a green enigma draped in illusions."
+    "storyText": "The Door of Aetherial Veils is before you, draped in an aura as elusive as moonbeams."
   },
   {
     "level": 7,
-    "riddle": "In the tropics, I reign supreme,\nA regal presence, like a dream.\nWith shades of red, my beauty's flare,\nOpposite leaves, beyond compare.\nA stipule nestled between petioles tight,\nA companion true, a wondrous sight.\nInferior ovary, a unique display,\nOvules on axis, in nature's sway.\nTwo carpels fused, an eternal embrace,\nA signature trait, throughout my space.",
+    "riddle": "In the tropics, I reign supreme,\nA stipule nestled between petioles tight,\nInferior ovary, a unique display.",
     "hint": "The world wakes up with a drink made from the roasted seeds of a plant in this family.",
     "answer": "Rubiaceae",
-    "storyText": "The journey leads you to the Door of Timeless Echoes. The guardian plant at this mystical threshold seems almost phantasmal, its aura swirling with ancient riddles and poised to sing its question."
+    "storyText": "The journey leads you to the Door of Timeless Echoes."
   },
   {
     "level": 8,
-    "riddle": "In my essence, mucilage resides,\nA soothing touch, where healing abides.\nWith leaves alternate, and stipules so,\nIn the wind's rhythm, they gently grow.\nEpicalyx in my flowers, you'll see,\nA delicate charm, a mystery to be.\nPetals twisted, a mesmerizing sight,\nStamens fused as one, a bond so strong,\nAnthers reniform, where secrets throng.\nFive carpels fused, they form a core.",
+    "riddle": "In my essence, mucilage resides,\nEpicalyx in my flowers, you'll see,\nPetals twisted, a mesmerizing sight,\nStamens fused as one, a bond so strong.",
     "hint": "A key ingredient in gumbo, a popular stew, is a slimy vegetable from this family.",
     "answer": "Malvaceae",
-    "storyText": "A plant with soft, fuzzy leaves stands before the next gate. It feels soothing to the touch and speaks in a gentle, calming tone, its flowers twisting in a mesmerizing dance."
+    "storyText": "A plant with soft, fuzzy leaves stands before the next gate, its flowers twisting in a mesmerizing dance."
   },
   {
     "level": 9,
-    "riddle": "In nature's realm, I claim my place,\nA floral wonder, an enchanting grace.\nTwo carpels I bear, chambers four at the end,\nAs my ovary matures, secrets descend.\nPetals five, fused in regular flow,\nA harmonious charm, in colors aglow.\nLeaves simple, they elegantly spread,\nAlternate patterns, as if they're led.\nAnd when my fruits form, a spectacle to see,\nWith spikes adorning, a sight so free.",
+    "riddle": "Two carpels I bear, chambers four at the end,\nAs my ovary matures, secrets descend.\nAnd when my fruits form, a spectacle to see,\nWith spikes adorning, a sight so free.",
     "hint": "A member of this family is a small blue flower symbolizing true love and remembrance.",
     "answer": "Boraginaceae",
-    "storyText": "You've navigated through realms both dark and light, and now you stand before the Door of Eternal Fire. The plant guardian here is a blazing enigma, its leaves flickering like the tongues of an immortal flame."
+    "storyText": "You've navigated through realms both dark and light, and now you stand before the Door of Eternal Fire."
   },
   {
     "level": 10,
-    "riddle": "In gardens and meadows, where whispers are heard,\nA bloom's born of secrets, like an unspoken word.\nWith perianth whorls double, a twin-headed crown,\nPetals all free, no chains do they know.\nHypogynous flowers, so lofty they stand,\nActinomorphic, I'm fair on all sides,\nAxile's where my tiny seed hides.\nStamens aplenty, more than a score,\nStamens so free, not fused, not bound.",
+    "riddle": "With perianth whorls double, a twin-headed crown,\nStamens aplenty, more than a score,\nStamens so free, not fused, not bound.",
     "hint": "Many species in this family produce a yellow, resinous sap.",
     "answer": "Clusiaceae",
-    "storyText": "You have ascended to the zenith of mysteries! The Door of Cosmic Resonance looms before you, pulsating with cosmic energy. Its guardian, a living paradox, is poised to sing the Final Question."
+    "storyText": "The Door of Cosmic Resonance looms before you, pulsating with cosmic energy."
   },
   {
     "level": 11,
-    "riddle": "In fields and in gardens, where the sun likes to dwell,\nA floral enigma has a secret to tell.\nTwo perianth whorls, not one but a pair,\nPetals set free, in the wind they just twirl.\nHypogynous beauty, I'm quite the rare pearl.\nCarpels fused tightly, a bond never torn,\nActinomorphic, so balanced and right,\nAxile placentation, a wonderful sight.\nStamens not many, less than a ten.",
+    "riddle": "Two perianth whorls, not one but a pair,\nStamens not many, less than a ten.",
     "hint": "This family provides a fruit that lathers in water and can be used as a natural soap.",
     "answer": "Sapindaceae",
-    "storyText": "You stand before the Door of Mirrored Fates, a looking glass of myriad possibilities. Its guardian is a kaleidoscopic flora that is many yet one, a complex of colors, forms, and dimensions."
+    "storyText": "You stand before the Door of Mirrored Fates, a looking glass of myriad possibilities."
   },
   {
     "level": 12,
-    "riddle": "In a modern family, I reside,\nWhere beauty reigns, a floral pride.\nMy flowers, queens of hues so true,\nIn shades of blue, a wondrous view.\nYet beware, for a warning I hold,\nIf by chance, you dare to taste,\nA bitter fate, not to be faced in haste.\nFor seven days, your tongue shall bear,\nThe bitter sting, a burden to wear.",
+    "riddle": "My flowers, queens of hues so true,\nIn shades of blue, a wondrous view.\nYet beware, for a warning I hold,\nIf by chance, you dare to taste,\nA bitter fate, not to be faced in haste.",
     "hint": "A taste from this family might make you pucker your lips.",
     "answer": "Gentianaceae",
-    "storyText": "A new door appears, guarded by a flower of the deepest blue. It seems to hold a bitter secret as it whispers its riddle to you."
+    "storyText": "A new door appears, guarded by a flower of the deepest blue. It seems to hold a bitter secret."
   },
   {
     "level": 13,
-    "riddle": "In a family where wizard hats reside,\nI find my place, where secrets hide.\nMy leaves, they glisten, sticky and neat,\nAn enigma of nature, a wonder to meet.\nWithin my ovary, two chambers lie,\nA mystical twist, as time goes by.\nAs I mature, they double in might,\nA magical marvel, veiled from sight.",
+    "riddle": "In a family where wizard hats reside,\nMy leaves, they glisten, sticky and neat,\nWithin my ovary, two chambers lie,\nAs I mature, they double in might.",
     "hint": "You might find the tiny seeds of this family sprinkled on your bread rolls.",
     "answer": "Pedaliaceae",
-    "storyText": "The next guardian is a peculiar plant with sticky leaves and strange, hooked fruits. It winks at you before posing its riddle."
+    "storyText": "The next guardian is a peculiar plant with sticky leaves and strange, hooked fruits."
   },
   {
     "level": 14,
-    "riddle": "In a water world, where beauty thrives,\nAquatic herbs, where floral life arrives.\nPerianth whorls, both present and near,\nTheir enchanting secrets, we revere.\nPetals free, like poetry in flight,\nFlowers perigynous, they gracefully bloom,\nCarpels many, in chambers they rest,\nNumerous parts, a floral dream.",
+    "riddle": "In a water world, where beauty thrives,\nAquatic herbs, where floral life arrives.\nFlowers perigynous, they gracefully bloom,\nCarpels many, in chambers they rest.",
     "hint": "Its large, floating leaves are sometimes called 'lily pads'.",
     "answer": "Nymphaeaceae",
-    "storyText": "The path leads you to a serene, shimmering pond. In its center, a magnificent water lily guards the way forward. It whispers its riddle across the water."
+    "storyText": "The path leads you to a serene, shimmering pond where a magnificent water lily guards the way."
   },
   {
     "level": 15,
-    "riddle": "Ah, buttercups, I embrace,\nWith perianth whorls, a delicate grace.\nPetals free, in nature's dance,\nHypogynous blooms, a mystic trance.\nCarpels free, they proudly stand,\nAs Herbs or climbers, across the land.\nWith five lobes in my perianth's hue,\nCompound leaves, a splendid view.",
-    "hint": "Be careful, as many beautiful members of this family are quite poisonous.",
-    "answer": "Ranunculaceae",
-    "storyText": "A field of cheerful buttercups blocks your path. One of them, brighter than the rest, rises to challenge you with its riddle."
+    "riddle": "Eat me as green delights,\nLeafy vegetables, a nutritious sight.\nIn spikes or racemes, my flowers bloom,\nWith bracts and bracteoles, a splendid plume.",
+    "hint": "A famous cartoon sailor gained his strength from eating a leafy green from this family.",
+    "answer": "Amaranthaceae",
+    "storyText": "Before you is a humble but strong plant, its leaves looking nutritious."
   },
   {
     "level": 16,
-    "riddle": "In gardens and meadows, where children play free,\nA flower blooms quietly, between you and me.\nTwo perianth whorls, both present and bright,\nPetals so free, they waltz to the breeze,\nIn peri or epigynous form, I aim to please.\nLeaves set in opposites, like partners in dance,\nExstipulate they are, given half a chance.",
-    "hint": "The leaves of these plants often have very distinct veins that run parallel to the margin.",
-    "answer": "Melastomataceae",
-    "storyText": "The guardian of this passage has perfectly opposite leaves and a balanced, elegant form. It presents its riddle with grace."
+    "riddle": "Ah, buttercups, I embrace,\nCarpels free, they proudly stand,\nAs Herbs or climbers, across the land.",
+    "hint": "Be careful, as many beautiful members of this family are quite poisonous.",
+    "answer": "Ranunculaceae",
+    "storyText": "A field of cheerful buttercups blocks your path. One of them, brighter than the rest, rises to challenge you."
   },
   {
     "level": 17,
-    "riddle": "In fields and in gardens, a tale's being spun,\nA flower's deep secret, a riddle that's fun.\nTwo perianth whorls, both there you'll see,\nPetals unbound, they dance in the sun,\nPerigynous or epigynous, either is fun.\nLeaves in opposites, like twins side by side,\nStipulate too, it's something I don't hide.",
-    "hint": "You would find members of this family living in salty water on the coast, standing on stilt-like roots.",
-    "answer": "Rhizophoraceae",
-    "storyText": "You find yourself near a coastal marsh. A strange tree with prominent roots guards the way forward, its leaves paired like twins."
+    "riddle": "Two perianth whorls, both present and bright,\nLeaves set in opposites, like partners in dance,\nExstipulate they are, given half a chance.",
+    "hint": "The leaves of these plants often have very distinct veins that run parallel to the margin.",
+    "answer": "Melastomataceae",
+    "storyText": "The guardian of this passage has perfectly opposite leaves and a balanced, elegant form."
   },
   {
     "level": 18,
-    "riddle": "In alternating rows, my leaves do sit,\nEdges like teeth, a serrated wit.\nTwo circles of beauty—my perianth's pride,\nPetals are free, no secrets to hide.\nPeri or epi—around ovary I lay,\nIn gardens and lore, I'm here to stay.",
-    "hint": "This family gives us the main ingredients for many delicious fruit pies.",
-    "answer": "Rosaceae",
-    "storyText": "A beautiful, thorny bush with serrated leaves blocks the path. It smells sweet, like a classic garden flower, as it poses its riddle."
+    "riddle": "Two perianth whorls, both there you'll see,\nLeaves in opposites, like twins side by side,\nStipulate too, it's something I don't hide.",
+    "hint": "You would find members of this family living in salty water on the coast, standing on stilt-like roots.",
+    "answer": "Rhizophoraceae",
+    "storyText": "You find yourself near a coastal marsh. A strange tree with prominent roots guards the way forward."
   },
   {
     "level": 19,
-    "riddle": "In nature's realm, my leaves doth sway,\nWith pulvinus, they bend and play.\nMy corolla, like a butterfly's flight,\nPollinators dance in pure delight.\nTen stamens I bear, a varied fusion,\nA single carpel in my ovary resides,\nWith ovule on the margin, where life abides.",
-    "hint": "Many plants in this family grow their seeds inside a pod.",
-    "answer": "Papilionaceae",
-    "storyText": "The next plant has flowers that look remarkably like butterflies. They seem to dance in the breeze as the plant speaks."
+    "riddle": "In alternating rows, my leaves do sit,\nEdges like teeth, a serrated wit.\nPetals are free, no secrets to hide,\nPeri or epi—around ovary I lay.",
+    "hint": "This family gives us the main ingredients for many delicious fruit pies.",
+    "answer": "Rosaceae",
+    "storyText": "A beautiful, thorny bush with serrated leaves blocks the path. It smells sweet, like a classic garden flower."
   },
   {
     "level": 20,
-    "riddle": "In lands of trees, shrubs, and climbers tall,\nMy presence graces, a verdant sprawl.\nFleshy flowers, a sight divine,\nPerianth in threes, in cycles they entwine.\nNumerous stamens, like stars they gleam,\nAnd carpels free, in nature's dream.\nSpirally arranged, a graceful array.",
-    "hint": "This family is known for its sweet, pulpy fruits, sometimes called 'custard apples'.",
-    "answer": "Annonaceae",
-    "storyText": "A tall, fragrant tree with fleshy flowers stands sentinel. Its voice is deep and resonant as it shares its ancient riddle."
+    "riddle": "With pulvinus, they bend and play.\nMy corolla, like a butterfly's flight,\nTen stamens I bear, a varied fusion.",
+    "hint": "Many plants in this family grow their seeds inside a pod.",
+    "answer": "Papilionaceae",
+    "storyText": "The next plant has flowers that look remarkably like butterflies."
   },
   {
     "level": 21,
-    "riddle": "In nature's realm, I hold my place,\nWith persistent calyx, a steady embrace.\nMy corolla fused, in regular attire,\nA floral symphony, it does inspire.\nStamens stout, with terminal flair,\nMy ovary, two carpels unite,\nForming chambers two, in nature's rite.\nWith ovules aplenty, on axile placentation,\nLeaves alternate, they gracefully sway.",
-    "hint": "This family contains some of our most common vegetables, but also some of the deadliest poisons.",
-    "answer": "Solanaceae",
-    "storyText": "A familiar-looking plant, reminiscent of a tomato or pepper plant, stands guard. Its calyx seems to cling stubbornly to its fruit as it speaks."
+    "riddle": "Fleshy flowers, a sight divine,\nPerianth in threes, in cycles they entwine.\nNumerous stamens, like stars they gleam,\nAnd carpels free, in nature's dream.",
+    "hint": "This family is known for its sweet, pulpy fruits, sometimes called 'custard apples'.",
+    "answer": "Annonaceae",
+    "storyText": "A tall, fragrant tree with fleshy flowers stands sentinel. Its voice is deep and resonant."
   },
   {
     "level": 22,
-    "riddle": "With perianth whorls, both present and fine,\nAnd petals that dance, in freedom they shine.\nFlowers hypogynous, carpels in fusion,\nActinomorphic in form, symmetrical grace,\nAxile their placentation, in their special place.\nStamens embrace, like a tube that they form,\nAround the ovary, in their well-scripted norm.\nLeaves extipulate, complex or pure.",
-    "hint": "This family includes a tree with very bitter leaves used in traditional medicine, and another with prized, reddish-brown wood.",
-    "answer": "Meliaceae",
-    "storyText": "The final door is guarded by a tree with complex, pinnate leaves. Its stamens form a distinctive tube around the ovary. It has an air of nobility."
+    "riddle": "With persistent calyx, a steady embrace.\nMy corolla fused, in regular attire,\nMy ovary, two carpels unite.",
+    "hint": "This family contains some of our most common vegetables, but also some of the deadliest poisons.",
+    "answer": "Solanaceae",
+    "storyText": "A familiar-looking plant, reminiscent of a tomato or pepper plant, stands guard."
   },
   {
     "level": 23,
-    "riddle": "I am the family of mint and of sage,\nMy stems are square, a distinctive stage.\nMy flowers in whorls, a fragrant delight,\nAnd leaves set opposite, a beautiful sight.\nMy ovary's divided, four lobes deep inside,\nFrom which a small nutlet has nowhere to hide.",
-    "hint": "Scratch my leaves, and you'll often be rewarded with a refreshing or savory scent.",
-    "answer": "Lamiaceae",
-    "storyText": "A gentle, fragrant breeze guides you to the next door, which is surrounded by a garden of aromatic herbs. The plant guardian smells of mint and speaks in a calming, melodic tone."
+    "riddle": "Stamens embrace, like a tube that they form,\nAround the ovary, in their well-scripted norm.\nLeaves extipulate, complex or pure.",
+    "hint": "This family includes a tree with very bitter leaves used in traditional medicine, and another with prized, reddish-brown wood.",
+    "answer": "Meliaceae",
+    "storyText": "The final door is guarded by a tree with complex, pinnate leaves."
   },
   {
     "level": 24,
-    "riddle": "I am the grasses, the wheat, and the corn,\nSince civilization's early morn.\nMy flowers are humble, in spikelets they grow,\nWith feathery stigmas that wave to and fro.\nMy stems are hollow, with nodes in between,\nA culinary kingdom, fit for a queen.",
-    "hint": "I am arguably the most economically important plant family to humankind.",
-    "answer": "Poaceae",
-    "storyText": "You enter a vast, golden savanna. The next door is hidden within a field of tall, whispering grasses. The wind itself seems to carry the riddle from the guardian of this domain."
+    "riddle": "A succulent puzzle, I often appear,\nMy stems are my leaves, my spines are my guard,\nWith an ovary inferior, deep in my base.",
+    "hint": "You might find me in a desert, but be careful not to touch!",
+    "answer": "Cactaceae",
+    "storyText": "The path forward shimmers with heat, leading you to a desert oasis."
   },
   {
     "level": 25,
-    "riddle": "My intricate flowers, a marvel to see,\nWith a column united, for the bee.\nI live on the air, or the soil, or a tree,\nMy seeds are like dust, wild and so free.\nMy symmetry's bilateral, one perfect line,\nA beauty exotic, and truly divine.",
-    "hint": "My members are some of the most prized and collected flowers in the world, known for their stunning and complex beauty.",
-    "answer": "Orchidaceae",
-    "storyText": "The path winds into a lush, humid jungle. Draped from the arm of a giant tree, an exquisite flower unlike any you've seen before unfurls its petals. It is the guardian, and its voice is as delicate as its form."
+    "riddle": "I am the family of mint and of sage,\nMy stems are square, a distinctive stage.\nMy ovary's divided, four lobes deep inside.",
+    "hint": "Scratch my leaves, and you'll often be rewarded with a refreshing or savory scent.",
+    "answer": "Lamiaceae",
+    "storyText": "A gentle, fragrant breeze guides you to the next door, which is surrounded by a garden of aromatic herbs."
   },
   {
     "level": 26,
-    "riddle": "I am the sunflower, the daisy, the aster,\nMy flower's a head, to avoid disaster.\nWhat seems like one bloom, is a hundred or more,\nA composite wonder, right at its core.\nWith florets of ray and of disc, I'm comprised,\nA clever deception, botanically prized.",
-    "hint": "My \"flower\" is actually a collection of many tiny flowers working together.",
-    "answer": "Asteraceae",
-    "storyText": "The next door is set in the middle of a vibrant, sun-drenched meadow. The guardian is a cheerful, golden flower that follows the sun. It speaks with the voice of a crowd, for it is many in one."
+    "riddle": "I am the grasses, the wheat, and the corn,\nMy flowers are humble, in spikelets they grow,\nMy stems are hollow, with nodes in between.",
+    "hint": "I am arguably the most economically important plant family to humankind.",
+    "answer": "Poaceae",
+    "storyText": "You enter a vast, golden savanna. The next door is hidden within a field of tall, whispering grasses."
   },
   {
     "level": 27,
-    "riddle": "My sap is often milky, and frequently strange,\nContaining compounds across a wide range.\nMy flowers are tiny, and cleverly fused,\nInto a false-flower, that gets bees enthused.\nA cyathium structure, a marvel to see,\nWith one female flower, and male flowers three.",
-    "hint": "Be cautious, for the milky sap of many in my family can be irritating or poisonous.",
-    "answer": "Euphorbiaceae",
-    "storyText": "The next guardian is a strange and striking plant, unlike the others. It bleeds a white, milky sap when a leaf is plucked. It warns you of its power before it poses its cryptic riddle."
+    "riddle": "My intricate flowers, a marvel to see,\nWith a column united, for the bee.\nMy seeds are like dust, wild and so free.",
+    "hint": "My members are some of the most prized and collected flowers in the world, known for their stunning and complex beauty.",
+    "answer": "Orchidaceae",
+    "storyText": "The path winds into a lush, humid jungle. Draped from the arm of a giant tree, an exquisite flower unfurls its petals."
   },
   {
     "level": 28,
-    "riddle": "I climb and I crawl, with tendrils so fine,\nA gourd is my fruit, from a twisting vine.\nI'm pumpkin and melon, and cucumber too,\nWith five-petaled flowers, of a yellowy hue.\nMy ovary's inferior, below the bloom's grace,\nA sprawling family, all over the place.",
-    "hint": "My fruits are often large, fleshy, and a key ingredient in autumnal feasts.",
-    "answer": "Cucurbitaceae",
-    "storyText": "The path leads to a sprawling patch of vines that snake across the ground. Large, heavy fruits hang from them. The guardian is the vine itself, its voice a chorus from many different flowers."
+    "riddle": "With leaves like a fan, or a feather so grand,\nMy fruit can be drupes, a coconut treat,\nMy flowers are many, on a spadix they're found.",
+    "hint": "I provide shade on sunny beaches and a refreshing drink from my large fruit.",
+    "answer": "Arecaceae",
+    "storyText": "The air grows warm and salty as you approach a white sand beach where a tall, swaying tree guards the way."
   },
   {
     "level": 29,
-    "riddle": "With parts in threes, a perfect design,\nSix tepals in two whorls, beautifully align.\nFrom a bulb I arise, when the spring season calls,\nA true monocot, standing proud and so tall.\nMy leaves have veins that run parallel and true,\nA classic beauty, for me and for you.",
-    "hint": "I am the family of the true lilies, tulips, and onions.",
-    "answer": "Liliaceae",
-    "storyText": "You arrive at a serene and elegant garden where the next door is guarded by a tall, majestic flower with large, trumpet-shaped blooms. Its voice is as clear and pure as its petals."
+    "riddle": "My petals are four, in the shape of a cross,\nMy fruits are a pod, a silique or silicle,\nI'm cabbage and mustard, and broccoli too.",
+    "hint": "Many of my members have a peppery or spicy flavor.",
+    "answer": "Brassicaceae",
+    "storyText": "You come to a well-tended vegetable patch where a plant with bluish-green leaves stands proudly."
   },
   {
     "level": 30,
-    "riddle": "My flower's a trick, a leaf in disguise,\nA hood called a spathe, for curious eyes.\nInside is a spadix, a spike standing tall,\nWhere tiny true flowers await nature's call.\nI can be a calla lily, or a skunk's potent smell,\nA peculiar family, with stories to tell.",
-    "hint": "My unique \"flower\" is actually a modified leaf (a bract) wrapped around a fleshy spike.",
-    "answer": "Araceae",
-    "storyText": "You follow a path into a boggy marsh where the air is thick and pungent. The guardian is a bizarre and beautiful plant with a single, large, hood-like leaf. Its voice is a low, mysterious hum."
+    "riddle": "In watery realms, my members reside,\nWith ribbon-like leaves that flow with the tide.\nI am the meadow that grows in the sea.",
+    "hint": "I'm not seaweed; I'm a true flowering plant that lives its entire life underwater.",
+    "answer": "Zosteraceae",
+    "storyText": "The path descends beneath the waves into a serene underwater meadow."
   },
   {
     "level": 31,
-    "riddle": "A trumpet of color, I greet the new day,\nBut my glory is fleeting, and soon fades away.\nI'm a vine that will twine, on a trellis I'll creep,\nWhile the world is still waking, from its slumber so deep.\nMy petals are fused, in a funnel-like grace,\nA morning's bright welcome, all over the place.",
-    "hint": "My common name is the \"Morning Glory\" family.",
-    "answer": "Convolvulaceae",
-    "storyText": "As dawn breaks, you find the next door covered in beautiful, trumpet-shaped flowers that seem to have opened just for you. The guardian is the vine itself, its voice as fresh as the morning dew."
+    "riddle": "My leaves are like needles, or scales so tight,\nI bear no true flowers, but cones in the light.\nMy seeds are exposed, on a cone's woody scale.",
+    "hint": "My family includes some of the tallest and oldest living things on Earth.",
+    "answer": "Pinaceae",
+    "storyText": "A cold wind blows as the path ascends into a high-altitude forest guarded by a colossal, fragrant fir tree."
   },
   {
     "level": 32,
-    "riddle": "With glands full of oil, my leaves have a sheen,\nA zesty perfume, in the air it is keen.\nI'm the orange, the lemon, the grapefruit, the lime,\nA family of flavor, that stands the test of time.\nMy fruit is a berry, with a leathery rind,\nA hesperidium, one of a kind.",
-    "hint": "Puncture a leaf or peel my fruit, and you'll release a strong, citrusy scent.",
-    "answer": "Rutaceae",
-    "storyText": "The air becomes bright and zesty as you enter a sun-drenched citrus grove. The guardian is a small, glossy-leaved tree laden with bright orange fruit. Its voice is sharp, tangy, and full of life."
+    "riddle": "I am the sunflower, the daisy, the aster,\nWhat seems like one bloom, is a hundred or more,\nWith florets of ray and of disc, I'm comprised.",
+    "hint": "My \"flower\" is actually a collection of many tiny flowers working together.",
+    "answer": "Asteraceae",
+    "storyText": "The next door is set in the middle of a vibrant, sun-drenched meadow."
   },
   {
     "level": 33,
-    "riddle": "With leaves evergreen, and a spicy, sweet scent,\nOn my powerful oils, you can always depend.\nMy stamens are many, a feathery sphere,\nMy ovary inferior, dispelling all fear.\nI am clove and allspice, and eucalyptus tree,\nA family of fragrance, for you and for me.",
-    "hint": "My family is famous for producing aromatic oils, including one from a tree native to Australia.",
-    "answer": "Myrtaceae",
-    "storyText": "The path leads to a grove of trees with peeling bark and a strong, medicinal scent. The guardian's voice is clean and sharp, clearing your head as it poses its riddle."
+    "riddle": "My flowers hang down, in a cluster so sweet,\nMy berries are blue, or cranberry red,\nMy petals are fused, in the shape of a bell.",
+    "hint": "You might find my berries in a muffin or a sauce served with holiday turkey.",
+    "answer": "Ericaceae",
+    "storyText": "The landscape transforms into a misty, rolling moor. A low-lying shrub with small, bell-shaped flowers guards the path."
   },
   {
     "level": 34,
-    "riddle": "I live in the dry, a succulent soul,\nMy fleshy leaves make me feel whole.\nMy flowers are bright, like daisies they seem,\nA carpet of color, a waking dream.\nWith many a stamen, and petals so fine,\nA \"stone plant\" or \"ice plant,\" a design so divine.",
-    "hint": "You can often find me called a \"living stone\" or \"ice plant\".",
+    "riddle": "I live in the dry, a succulent soul,\nMy fleshy leaves make me feel whole.\nMy flowers are bright, like daisies they seem.",
+    "hint": "You can often find me called a 'living stone' or 'ice plant'.",
     "answer": "Aizoaceae",
-    "storyText": "The path leads to a sun-scorched, rocky outcrop where the ground is carpeted with fleshy, gem-like plants. One of them shimmers, its daisy-like flower opening to speak its riddle."
+    "storyText": "The path leads to a sun-scorched, rocky outcrop where the ground is carpeted with fleshy, gem-like plants."
   },
   {
     "level": 35,
-    "riddle": "I look like a pine, with needles so grand,\nBut I'm a true flower, across the land.\nMy twigs are jointed, my leaves are but scales,\nMy flowers are tiny, whispered on gales.\nA \"she-oak\" they call me, with a cone-like fruit,\nA flowering plant in a conifer suit.",
+    "riddle": "I look like a pine, with needles so grand,\nBut I'm a true flower, across the land.\nMy twigs are jointed, my leaves are but scales.",
     "hint": "I may look like a pine tree, but I am a flowering plant with very tiny flowers.",
     "answer": "Casuarinaceae",
-    "storyText": "You enter a windy coastal area where strange, wispy trees stand guard. They look like pine trees but feel different. The wind whistling through their needle-like branches carries the sound of the next riddle."
+    "storyText": "You enter a windy coastal area where strange, wispy trees stand guard."
   },
   {
     "level": 36,
-    "riddle": "My flower's a trick, a clever disguise,\nA colorful bract, to catch wandering eyes.\nThe true bloom is small, a trumpet so thin,\nBut my leafy facade is where the wonders begin.\nAt four in the afternoon, my flowers awake,\nA punctual blooming, for goodness sake!",
+    "riddle": "My flower's a trick, a clever disguise,\nA colorful bract, to catch wandering eyes.\nAt four in the afternoon, my flowers awake.",
     "hint": "My most famous member is Bougainvillea, whose \"flowers\" are actually colorful leaves (bracts).",
     "answer": "Nyctaginaceae",
-    "storyText": "The next door is covered in what looks like a cascade of vibrant, paper-thin flowers. A closer look reveals they are colorful leaves, and a tiny flower within them whispers the riddle to you."
+    "storyText": "The next door is covered in what looks like a cascade of vibrant, paper-thin flowers."
   },
   {
     "level": 37,
-    "riddle": "With milky white sap, my branches do bleed,\nA tropical family, a bountiful creed.\nMy stamens stand ready, a curious trait,\nDirectly opposing my petals' fate.\nMy fruit is a berry, from a flower so plain,\nA source of sweet latex, again and again.",
+    "riddle": "With milky white sap, my branches do bleed,\nMy stamens stand ready, a curious trait,\nDirectly opposing my petals' fate.",
     "hint": "My family produces a sweet, sticky latex that was the original source of chewing gum.",
     "answer": "Sapotaceae",
-    "storyText": "The air grows heavy and sweet as you enter a dense tropical forest. The guardian is a tall tree with leathery leaves. A drop of milky white sap drips from a twig as the tree begins to speak."
+    "storyText": "The air grows heavy and sweet as you enter a dense tropical forest. A drop of milky white sap drips from a twig as the tree begins to speak."
   },
   {
     "level": 38,
-    "riddle": "My flowers are lipped, in a two-sided face,\nA zygomorphic beauty, full of grace.\nMy ovules are many, on an axis they sit,\nIn chambers so swollen, where new lives are knit.\nA \"figwort\" they call me, in gardens I'm grown,\nA puzzle of petals, a seed to be sown.",
+    "riddle": "My flowers are lipped, in a two-sided face,\nMy ovules are many, on an axis they sit.",
     "hint": "The snapdragon flower is a classic example of my family's two-lipped floral shape.",
     "answer": "Scrophulariaceae",
-    "storyText": "You find the next door in a whimsical garden filled with strangely shaped flowers. The guardian plant has blooms that look like little mouths or faces, and it speaks with a playful, lopsided smile."
+    "storyText": "You find the next door in a whimsical garden filled with strangely shaped flowers."
   },
   {
     "level": 39,
-    "riddle": "Beware my embrace, for I carry a sting,\nA lesson in caution, my tiny hairs bring.\nMy flowers are humble, and green is their hue,\nOn the wind they do travel, to a destiny new.\nA nettle's sharp touch, is my family's fame,\nA memorable meeting, when you speak my name.",
+    "riddle": "Beware my embrace, for I carry a sting,\nMy flowers are humble, and green is their hue,\nOn the wind they do travel, to a destiny new.",
     "hint": "My most famous members are known for their stinging hairs.",
     "answer": "Urticaceae",
-    "storyText": "You must carefully navigate a patch of wild, untamed greenery. The guardian plant looks harmless, but you feel a tingling sensation as you get close. It speaks in a sharp, pointed voice."
+    "storyText": "You must carefully navigate a patch of wild, untamed greenery. The guardian plant looks harmless, but you feel a tingling sensation as you get close."
+  },
+  {
+    "level": 40,
+    "riddle": "My flowers gather in a flattened spray,\nAn umbel of blossoms to brighten the day.\nI give you the carrot, the parsley, the dill.",
+    "hint": "The arrangement of my flowers resembles an inside-out umbrella.",
+    "answer": "Apiaceae",
+    "storyText": "The path opens into a well-organized herb garden where the air is rich with the scents of anise and fennel."
+  },
+  {
+    "level": 41,
+    "riddle": "I am the oak, the beech, and the chestnut tree,\nMy fruit is a nut, in a cupule it sits.",
+    "hint": "My fruit is a favorite food of squirrels.",
+    "answer": "Fagaceae",
+    "storyText": "The journey takes you deep into an ancient, primeval forest. The door is carved into the trunk of a colossal oak tree."
+  },
+  {
+    "level": 42,
+    "riddle": "A trumpet of color, I greet the new day,\nBut my glory is fleeting, and soon fades away.\nI'm a vine that will twine, on a trellis I'll creep.",
+    "hint": "My common name is the 'Morning Glory' family.",
+    "answer": "Convolvulaceae",
+    "storyText": "As dawn breaks, you find the next door covered in beautiful, trumpet-shaped flowers that seem to have opened just for you."
+  },
+  {
+    "level": 43,
+    "riddle": "With glands full of oil, my leaves have a sheen,\nI'm the orange, the lemon, the grapefruit, the lime.",
+    "hint": "Puncture a leaf or peel my fruit, and you'll release a strong, citrusy scent.",
+    "answer": "Rutaceae",
+    "storyText": "The air becomes bright and zesty as you enter a sun-drenched citrus grove."
+  },
+  {
+    "level": 44,
+    "riddle": "With leaves evergreen, and a spicy, sweet scent,\nMy stamens are many, a feathery sphere,\nI am clove and allspice, and eucalyptus tree.",
+    "hint": "My family is famous for producing aromatic oils, including one from a tree native to Australia.",
+    "answer": "Myrtaceae",
+    "storyText": "The path leads to a grove of trees with peeling bark and a strong, medicinal scent."
+  },
+  {
+    "level": 45,
+    "riddle": "Beware of my oils, for they can cause a great rash,\nI am cashew, and mango, and pistachio nut,\nBut poison ivy, is a different cut.",
+    "hint": "I contain both delicious tropical fruits and a notoriously irritating vine.",
+    "answer": "Anacardiaceae",
+    "storyText": "You approach the next door cautiously, as it is surrounded by a mix of tempting fruit trees and suspicious-looking vines."
+  },
+  {
+    "level": 46,
+    "riddle": "I am a vine, with a tendril so sly,\nMy berries in bunches, a sweet, juicy prize,\nFermented for wine, a worldly surprise.",
+    "hint": "From my fruit, the world's most famous celebratory beverage is made.",
+    "answer": "Vitaceae",
+    "storyText": "The path winds through a vineyard, where grape-laden vines climb over beautiful trellises."
+  },
+  {
+    "level": 47,
+    "riddle": "My leaves are so fleshy, they store water with ease,\nMy metabolism's special, it's called 'CAM' for short.",
+    "hint": "My thick, fleshy leaves allow me to store water, making me a succulent.",
+    "answer": "Crassulaceae",
+    "storyText": "You must now traverse a dry, rocky cliffside. The door is guarded by a tough, beautiful plant growing straight from the stone."
+  },
+  {
+    "level": 48,
+    "riddle": "My petals and sepals, are colored the same,\nSix tepals in total, I play a fun game.\nMy leaves are like swords, rising up from the ground.",
+    "hint": "My leaves are typically unifacial, meaning they are flattened in a single plane like a blade.",
+    "answer": "Iridaceae",
+    "storyText": "The next door is in a field of stunningly beautiful flowers with blade-like leaves."
+  },
+  {
+    "level": 49,
+    "riddle": "My flower is complex, a puzzle to see,\nWith a fringe-like corona, for the bee and for me.\nI'm a tropical vine, with a fruit full of passion.",
+    "hint": "My flower has a unique, fringed crown of filaments that is my most distinctive feature.",
+    "answer": "Passifloraceae",
+    "storyText": "You enter a tropical greenhouse, where an impossibly intricate and exotic flower hangs from a vine."
+  },
+  {
+    "level": 50,
+    "riddle": "My petals are fragile, like crepe paper thin,\nFrom my unripe capsule, a medicine's within.\nMy sap can be milky, and often quite deep.",
+    "hint": "A powerful pain-relieving medicine is derived from the latex of one of my members.",
+    "answer": "Papaveraceae",
+    "storyText": "The field ahead is a sea of vibrant red. The door is guarded by a flower with delicate, papery petals."
+  },
+  {
+    "level": 51,
+    "riddle": "My flowers are paired, like two lovers they stand,\nA sweet-smelling trumpet, across the land.\n'Two-lipped' my corolla, enough has been said.",
+    "hint": "My most famous member is a sweet-smelling vine whose nectar can be sipped directly from the flower.",
+    "answer": "Caprifoliaceae",
+    "storyText": "You find the next door entwined with a fragrant, flowering vine. The air is thick with its sweet perfume."
+  },
+  {
+    "level": 52,
+    "riddle": "My stem has swollen nodes, a feature so keen,\nAnd a papery sheath, called an 'ocrea,' is seen.\nI am buckwheat and rhubarb, and sorrel so tart.",
+    "hint": "Look for the thin, papery sheath that clasps the stem where each leaf joins.",
+    "answer": "Polygonaceae",
+    "storyText": "The path leads through a patch of weeds and hardy-looking plants. The guardian points to its swollen joints and the papery sheaths on its stem."
+  },
+  {
+    "level": 53,
+    "riddle": "My flowers are lipped, in a two-sided face,\nA zygomorphic beauty, full of grace.\nMy ovules are many, on an axis they sit,\nIn chambers so swollen, where new lives are knit.",
+    "hint": "The snapdragon flower is a classic example of my family's two-lipped floral shape.",
+    "answer": "Scrophulariaceae",
+    "storyText": "You find the next door in a whimsical garden filled with strangely shaped flowers."
   }
 ]
