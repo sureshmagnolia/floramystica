@@ -27,6 +27,45 @@
         .feedback-text { font-style: italic; font-weight: bold; }
         .feedback-correct { color: #2e8b57; }
         .feedback-incorrect { color: #d9534f; }
+
+        #result-screen, #loading-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+            border-radius: 15px; z-index: 10;
+            padding: 20px;
+        }
+        .petal-icon { font-size: 5em; animation: bloom 0.8s ease-out; }
+        #result-praise { font-size: 1.3em; color: #2e8b57; font-weight: bold; margin: 15px 0; }
+        @keyframes bloom {
+            from { transform: scale(0.2) rotate(-45deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* --- NEW: Loading Animation Styles --- */
+        @property --progress-angle {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+        }
+        .loader-circle {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: 
+            radial-gradient(white 55%, transparent 56%),
+            conic-gradient(#2e8b57 var(--progress-angle), #eaf5ff 0deg);
+          animation: load-progress 2s linear forwards;
+        }
+        @keyframes load-progress {
+          to { --progress-angle: 360deg; }
+        }
+        #loading-overlay p {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
         @media (max-width: 520px) { .autocomplete-container, #submit-button, .control-button { width: 100%; margin-left: 0; margin-right: 0; } }
         @media (max-height: 750px) { .riddle-text { max-height: 20vh; overflow-y: auto; } }
     </style>
@@ -47,31 +86,43 @@
             <button id="submit-button" style="display:none;">Submit Answer</button>
         </div>
         <div id="feedback-area" class="feedback-text"></div>
+
+        <div id="result-screen" style="display:none;">
+            <div id="analysing-state">
+                <p style="font-size: 1.2em; color: #555;">Analysing your answer...</p>
+            </div>
+            <div id="correct-state" style="display:none;">
+                <div class="petal-icon">🌸</div>
+                <p id="result-praise"></p>
+                <button id="next-level-button" class="control-button">Next Level ➡️</button>
+            </div>
+        </div>
+        
+        <div id="loading-overlay" style="display:none;">
+            <div class="loader-circle"></div>
+            <p>Loading Next Level...</p>
+        </div>
     </div>
 
     <script>
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwdMk_TwMcs6coyMyBad-ChWJ7nwfhxOBYo6q6qndJlf2l6yhd7WWG1aAqsgFxiAnpEFw/exec';
-        let currentLevel = 1, isGameActive = true, score = 0, plantFamilies = [];
-        const praiseMessages = ["Brilliant! ✨ You're a natural botanist!", "Amazing! 🌿 The Grand Tree feels stronger already!", "Incredible! 🌸 Your wisdom shines bright!", "Excellent work! 🌳 The shadow recedes!", "Perfect! 🌟 You've mastered that riddle!"];
+        const DATA_URL = 'https://raw.githubusercontent.com/sureshmagnolia/floramystica/main/quests.json';
         
-        const scoreDisplay = document.getElementById('score-display'), storyArea = document.getElementById('story-area'), riddleArea = document.getElementById('riddle-area'), autocompleteContainer = document.getElementById('autocomplete-container'), answerInput = document.getElementById('answer-input'), autocompleteResults = document.getElementById('autocomplete-results'), startScreenControls = document.getElementById('start-screen-controls'), submitButton = document.getElementById('submit-button'), feedbackArea = document.getElementById('feedback-area');
+        let currentLevel = 1, isGameActive = true, score = 0, allQuests = [], plantFamilies = [];
+        const praiseMessages = [
+            "Brilliant! ✨ You've earned a Petal of Power!", "Amazing! 🌿 Another magical petal is yours!", "Incredible! 🌸 The Grand Tree accepts your offering!", "Excellent! 🌳 You retrieve a glowing petal!", "Perfect! 🌟 A Petal of Power has been won!", "Flawless! The botanical secrets are yours to command!", "Magnificent! Another guardian is bested! A petal appears!", "Your knowledge shines! You've claimed another petal! 💡", "Sublime! The essence of the flower is revealed to you! 🌺", "The shadow trembles before your skill! A petal is yours!", "A true master of flora! You've won another petal! 🍃", "The Grand Tree's roots grow stronger with your wisdom! 💪", "Stunning! The kingdom's hope is restored!", "Your connection to the flora is powerful! A petal is your reward!", "You are the champion the Garden Kingdom needs! 🏆"
+        ];
+        
+        const scoreDisplay = document.getElementById('score-display'), storyArea = document.getElementById('story-area'), riddleArea = document.getElementById('riddle-area'), gameControls = document.getElementById('game-controls'), autocompleteContainer = document.getElementById('autocomplete-container'), answerInput = document.getElementById('answer-input'), autocompleteResults = document.getElementById('autocomplete-results'), startScreenControls = document.getElementById('start-screen-controls'), submitButton = document.getElementById('submit-button'), nextLevelButton = document.getElementById('next-level-button'), feedbackArea = document.getElementById('feedback-area'), resultScreen = document.getElementById('result-screen'), analysingState = document.getElementById('analysing-state'), correctState = document.getElementById('correct-state'), resultPraise = document.getElementById('result-praise'), loadingOverlay = document.getElementById('loading-overlay');
 
         function updateScore(newScore) { score = newScore; scoreDisplay.textContent = `Score: ${score}`; localStorage.setItem('floraMysticaScore', score); }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const script = document.createElement('script');
-            script.src = `${WEB_APP_URL}?list=families&callback=onFamiliesLoaded`;
-            document.body.appendChild(script);
-            script.onerror = () => {
-                console.error("Failed to load plant families script.");
-                storyArea.innerHTML = "<h3>Error</h3><p>Could not load essential game data. Please check your internet connection and refresh.</p>";
-            };
+            fetch(DATA_URL).then(response => response.json()).then(data => {
+                allQuests = data;
+                plantFamilies = [...new Set(allQuests.map(q => q.answer))].sort();
+                initializeGameUI();
+            }).catch(error => { console.error("Failed to load quest data:", error); storyArea.innerHTML = "<h3>Error</h3><p>Could not load essential game data. Please refresh.</p>"; });
         });
-
-        function onFamiliesLoaded(data) {
-            plantFamilies = data;
-            initializeGameUI();
-        }
 
         function initializeGameUI() {
             const savedLevel = localStorage.getItem('floraMysticaLevel'), savedScore = localStorage.getItem('floraMysticaScore');
@@ -91,8 +142,7 @@
         }
         
         function showMainStory() {
-            let storyHTML = '<h3>The Garden Kingdom</h3><p>In a land far removed from the mundanities of our world exists the Garden Kingdom—a realm governed not by kings or queens, but by the flora that roots itself deeply into the very soul of the land. Here, every flower, tree, and herb holds mystical properties, and their harmonious existence ensures the kingdom remains a utopia of enchanting meadows, mystical forests, and mesmerizing gardens.</p><h3>The Grand Tree of Lore</h3><p>At the heart of this realm stands the Grand Tree of Lore, a colossal tree with foliage that glistens like emeralds under the eternal sunlight. It\'s the keeper of ancient wisdom, the sustainer of life, and the epitome of unity among all flora.</p><h3>A Shadow Falls</h3><p>But not all is well in this verdant paradise. A dark, formless shadow has slowly begun to creep across the kingdom, suffocating the lesser flora and draining them of their mystical essence. Its once-luminous leaves have dulled, and the symphony of whispers that once filled the air around it has descended into agonized groans.</p><h3>The Quest for the Petals of Power</h3><p>Ancient scrolls reveal that only the legendary "Petals of Power" can restore the Tree. These petals, once part of the Grand Tree itself, were scattered across the realm long ago, each guarded by a flora guardian known for their wisdom and cunning.</p><h3>A Call to Adventure</h3><p>Using the last remnants of its power, the Grand Tree sends out a call for help. Brave adventurers are needed to embark on an epic quest to retrieve the Petals of Power and restore vitality to the Garden Kingdom. The survival of the Garden Kingdom hangs in the balance, and so begins your saga.</p>';
-            storyArea.innerHTML = storyHTML;
+            storyArea.innerHTML = '<h3>The Garden Kingdom</h3><p>In a land far removed from the mundanities of our world exists the Garden Kingdom...</p><h3>The Grand Tree of Lore</h3><p>At the heart of this realm stands the Grand Tree of Lore...</p><h3>A Shadow Falls</h3><p>But not all is well in this verdant paradise...</p><h3>The Quest for the Petals of Power</h3><p>Ancient scrolls reveal that only the legendary "Petals of Power" can restore the Tree...</p><h3>A Call to Adventure</h3><p>Using the last remnants of its power, the Grand Tree sends out a call for help, and so begins your saga.</p>';
         }
 
         function startGame(isNewGame) {
@@ -102,47 +152,80 @@
         }
 
         function fetchRiddle(level) {
-            isGameActive = false; storyArea.textContent = 'Loading the challenge...'; localStorage.setItem('floraMysticaLevel', level);
-            riddleArea.style.display = 'none'; submitButton.style.display = 'none'; autocompleteContainer.style.display = 'none';
-            fetch(`${WEB_APP_URL}?level=${level}`).then(response => response.json()).then(data => {
-                if (data.error) {
-                    storyArea.innerHTML = `<strong>Congratulations! You are victorious!</strong><br>With a final score of ${score}, you have saved the Garden Kingdom! 🏆`;
-                    riddleArea.style.display = 'none'; autocompleteContainer.style.display = 'none';
-                    startScreenControls.innerHTML = `<button id="restart-button" class="control-button">Play Again</button>`;
-                    startScreenControls.style.display = 'block';
-                    document.getElementById('restart-button').addEventListener('click', () => startGame(true));
-                } else {
-                    storyArea.textContent = data.storyText; riddleArea.textContent = data.riddle;
-                    riddleArea.style.display = 'block'; autocompleteContainer.style.display = 'inline-block'; submitButton.style.display = 'inline-block';
-                    submitButton.disabled = false; answerInput.value = ''; answerInput.focus(); feedbackArea.textContent = ''; isGameActive = true;
-                }
-            }).catch(error => console.error('Error fetching riddle:', error));
+            const quest = allQuests.find(q => q.level === level);
+            if (!quest) {
+                storyArea.innerHTML = `<strong>Congratulations! You are victorious!</strong><br>With a final score of ${score}, you have saved the Garden Kingdom! 🏆`;
+                riddleArea.style.display = 'none'; gameControls.style.display = 'none';
+                startScreenControls.innerHTML = `<button id="restart-button" class="control-button">Play Again</button>`;
+                startScreenControls.style.display = 'block';
+                document.getElementById('restart-button').addEventListener('click', () => startGame(true));
+                return;
+            }
+
+            localStorage.setItem('floraMysticaLevel', level);
+            storyArea.textContent = quest.storyText;
+            riddleArea.textContent = quest.riddle;
+            gameControls.style.display = 'block';
+            riddleArea.style.display = 'block';
+            autocompleteContainer.style.display = 'inline-block';
+            submitButton.style.display = 'inline-block';
+            submitButton.disabled = false;
+            answerInput.value = '';
+            answerInput.focus();
+            feedbackArea.textContent = '';
+            isGameActive = true;
         }
         
         function checkAnswer() {
-            isGameActive = false; submitButton.disabled = true;
+            isGameActive = false;
             const userAnswer = answerInput.value;
-            if (!userAnswer) { feedbackArea.textContent = 'Please select an answer.'; isGameActive = true; submitButton.disabled = false; return; }
-            autocompleteResults.style.display = 'none';
-            const checkUrl = `${WEB_APP_URL}?level=${currentLevel}&check=true&answer=${encodeURIComponent(userAnswer)}`;
-            fetch(checkUrl).then(response => response.json()).then(data => {
-                if (data.result === 'correct') {
+            const quest = allQuests.find(q => q.level === currentLevel);
+            if (!userAnswer || !quest) { isGameActive = true; return; }
+            
+            autocompleteResults.style.display = 'none'; riddleArea.style.display = 'none'; gameControls.style.display = 'none'; feedbackArea.style.display = 'none';
+            resultScreen.style.display = 'flex'; analysingState.style.display = 'block'; correctState.style.display = 'none';
+
+            setTimeout(() => {
+                if (userAnswer.toLowerCase().trim() === quest.answer.toLowerCase().trim()) {
                     updateScore(score + 10);
-                    feedbackArea.className = 'feedback-text feedback-correct';
-                    feedbackArea.textContent = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
+                    resultPraise.textContent = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
                     currentLevel++;
-                    setTimeout(() => fetchRiddle(currentLevel), 2000);
+                    analysingState.style.display = 'none';
+                    correctState.style.display = 'block';
                 } else {
                     updateScore(score - 5);
+                    resultScreen.style.display = 'none';
+                    riddleArea.style.display = 'block'; gameControls.style.display = 'block'; feedbackArea.style.display = 'block';
                     feedbackArea.className = 'feedback-text feedback-incorrect';
-                    feedbackArea.textContent = `🤔 Not quite. Here's a hint: ${data.hint}`;
-                    isGameActive = true; submitButton.disabled = false; answerInput.focus();
+                    feedbackArea.textContent = `🤔 Not quite. Here's a hint: ${quest.hint}`;
+                    isGameActive = true;
+                    submitButton.disabled = false;
+                    answerInput.focus();
                 }
-            }).catch(error => { console.error('Error checking answer:', error); isGameActive = true; submitButton.disabled = false; });
+            }, 1500);
         }
         
         submitButton.addEventListener('click', () => { if (isGameActive) checkAnswer(); });
         answerInput.addEventListener('keydown', (event) => { if (event.key === 'Enter' && isGameActive) checkAnswer(); });
+        
+        // --- MODIFIED: Event listener for "Next Level" button now includes animation ---
+        nextLevelButton.addEventListener('click', () => {
+            resultScreen.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
+            
+            // This resets the CSS animation so it can run again
+            const loader = document.querySelector('.loader-circle');
+            loader.style.animation = 'none';
+            loader.offsetHeight; // Trigger reflow
+            loader.style.animation = 'load-progress 2s linear forwards';
+
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                feedbackArea.style.display = 'block';
+                fetchRiddle(currentLevel);
+            }, 2000);
+        });
+
         answerInput.addEventListener('input', () => {
             const inputValue = answerInput.value; autocompleteResults.innerHTML = '';
             if (inputValue.length < 3) { autocompleteResults.style.display = 'none'; return; }
