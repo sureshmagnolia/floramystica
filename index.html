@@ -113,7 +113,7 @@
         const TIMEZONE_OFFSET = 5.5; // GMT+5:30
         const DAILY_RESET_HOUR = 6; // 6:00 AM
         
-        let currentLevel = 1, isGameActive = true, score = 0, allQuests = [], plantFamilies = [];
+        let currentLevel = 1, isGameActive = true, score = 0, allQuests = [], plantFamilies = [], countdownInterval = null;
         const praiseMessages = [
             "Brilliant! ✨ You've earned a Petal of Power!", "Amazing! 🌿 Another magical petal is yours!", "Incredible! 🌸 The Grand Tree accepts your offering!", "Excellent! 🌳 You retrieve a glowing petal!", "Perfect! 🌟 A Petal of Power has been won!", "Flawless! The botanical secrets are yours to command!", "Magnificent! Another guardian is bested! A petal appears!", "Your knowledge shines! You've claimed another petal! 💡", "Sublime! The essence of the flower is revealed to you! 🌺", "The shadow trembles before your skill! A petal is yours!", "A true master of flora! You've won another petal! 🍃", "The Grand Tree's roots grow stronger with your wisdom! 💪", "Stunning! The kingdom's hope is restored!", "Your connection to the flora is powerful! A petal is your reward!", "You are the champion the Garden Kingdom needs! 🏆"
         ];
@@ -137,7 +137,7 @@
               resultPraise = document.getElementById('result-praise'),
               loadingOverlay = document.getElementById('loading-overlay');
 
-        // --- NEW: Daily Progress Functions ---
+        // --- Daily Progress Functions ---
         function getCurrentISTDate() {
             const now = new Date();
             // Convert to IST (GMT+5:30)
@@ -194,6 +194,13 @@
             
             if (diff <= 0) {
                 countdownArea.style.display = 'none';
+                // Clear interval when countdown completes
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                // Refresh the page to allow playing new puzzle
+                location.reload();
                 return true;
             }
             
@@ -205,6 +212,16 @@
             countdownArea.style.display = 'block';
             
             return false;
+        }
+
+        function startCountdown() {
+            // Clear any existing countdown
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            // Start new countdown
+            countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
         }
 
         function updateScore(newScore) { 
@@ -231,23 +248,20 @@
                 scoreDisplay.textContent = `Score: ${score}`; 
             }
 
-            // Check daily progress
+            // Check daily progress - only show countdown if already completed today
             const savedProgress = localStorage.getItem('floraMysticaDailyProgress');
             if (savedProgress) {
                 const progress = JSON.parse(savedProgress);
                 const currentKey = getDailyKey();
                 
                 if (progress.dateKey === currentKey && progress.completed) {
-                    // Already completed today's puzzle
+                    // Already completed today's puzzle - show countdown
                     showDailyCompletedScreen(progress.level);
                     return;
                 }
             }
 
-            // Start countdown timer if needed
-            setInterval(updateCountdown, 1000);
-            
-            // Continue with normal initialization
+            // Continue with normal initialization (no countdown on first visit/start)
             const savedLevel = localStorage.getItem('floraMysticaLevel');
             if (savedLevel && parseInt(savedLevel, 10) > 1) {
                 currentLevel = parseInt(savedLevel, 10);
@@ -271,8 +285,7 @@
             gameControls.style.display = 'none';
             
             // Show countdown to next puzzle
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+            startCountdown();
             
             startScreenControls.innerHTML = `<button id="view-stats" class="control-button">View Statistics</button>`;
             startScreenControls.style.display = 'block';
@@ -307,6 +320,7 @@
             }
             startScreenControls.style.display = 'none';
             dailyInfo.style.display = 'none';
+            countdownArea.style.display = 'none'; // Ensure countdown is hidden when starting game
             fetchRiddle(currentLevel);
         }
 
@@ -339,7 +353,7 @@
             answerInput.value = '';
             answerInput.focus();
             feedbackArea.textContent = '';
-            countdownArea.style.display = 'none';
+            countdownArea.style.display = 'none'; // Ensure countdown is hidden during gameplay
             isGameActive = true;
         }
         
@@ -398,7 +412,8 @@
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
                 feedbackArea.style.display = 'block';
-                fetchRiddle(currentLevel);
+                // After completing a puzzle, show the daily completed screen with countdown
+                showDailyCompletedScreen(currentLevel - 1); // Show the level that was just completed
             }, 2000);
         });
 
