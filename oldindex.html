@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora Mystica: The Magical Path</title>
+
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #f0f8ff; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; box-sizing: border-box; }
+        .game-container { background-color: #ffffff; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); width: 95%; max-width: 600px; text-align: center; position: relative; }
+        #score-display { background-color: #eaf5ff; color: #2e8b57; padding: 5px 15px; border-radius: 20px; font-size: 1.2em; font-weight: bold; margin: -10px auto 15px auto; display: inline-block; }
+        h1 { color: #2e8b57; margin-top: 0; margin-bottom: 20px; font-size: 1.8em; }
+        .riddle-text, .feedback-text { margin: 20px 0; line-height: 1.6; font-size: 1.1em; min-height: 20px; }
+        .story-text { margin: 20px 0; line-height: 1.6; font-size: 1.1em; min-height: 20px; max-height: 40vh; overflow-y: auto; padding-right: 15px; text-align: left; }
+        .story-text h3 { color: #3cb371; margin-bottom: 5px; }
+        .story-text p { margin-top: 0; }
+        .riddle-text { white-space: pre-wrap; text-align: left; padding: 15px; background-color: #fafafa; border-left: 4px solid #3cb371; border-radius: 5px; }
+        #game-controls { margin-top: 25px; }
+        .autocomplete-container { position: relative; display: inline-block; width: 70%; }
+        .instruction-text { font-size: 0.9em; font-style: italic; color: #555; margin-bottom: 8px; }
+        #answer-input { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em; box-sizing: border-box; }
+        .autocomplete-items { position: absolute; border: 1px solid #d4d4d4; border-bottom: none; border-top: none; z-index: 99; top: 100%; left: 0; right: 0; max-height: 200px; overflow-y: auto; background-color: #fff; }
+        .autocomplete-items div { padding: 10px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #d4d4d4; text-align: left; }
+        .autocomplete-items div:hover { background-color: #e9e9e9; }
+        #submit-button, .control-button { padding: 12px 20px; border: none; background-color: #2e8b57; color: white; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s; vertical-align: top; margin: 5px; }
+        #submit-button:hover, .control-button:hover { background-color: #3cb371; }
+        .feedback-text { font-style: italic; font-weight: bold; }
+        .feedback-correct { color: #2e8b57; }
+        .feedback-incorrect { color: #d9534f; }
+
+        #result-screen, #loading-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+            border-radius: 15px; z-index: 10;
+            padding: 20px;
+        }
+        .petal-icon { font-size: 5em; animation: bloom 0.8s ease-out; }
+        #result-praise { font-size: 1.3em; color: #2e8b57; font-weight: bold; margin: 15px 0; }
+        @keyframes bloom {
+            from { transform: scale(0.2) rotate(-45deg); opacity: 0; }
+            to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* --- NEW: Loading Animation Styles --- */
+        @property --progress-angle {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+        }
+        .loader-circle {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: 
+            radial-gradient(white 55%, transparent 56%),
+            conic-gradient(#2e8b57 var(--progress-angle), #eaf5ff 0deg);
+          animation: load-progress 2s linear forwards;
+        }
+        @keyframes load-progress {
+          to { --progress-angle: 360deg; }
+        }
+        #loading-overlay p {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        @media (max-width: 520px) { .autocomplete-container, #submit-button, .control-button { width: 100%; margin-left: 0; margin-right: 0; } }
+        @media (max-height: 750px) { .riddle-text { max-height: 20vh; overflow-y: auto; } }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Flora Mystica: The Magical Path</h1>
+        <div id="score-display">Score: 0</div>
+        <div id="story-area" class="story-text">Loading game data...</div>
+        <div id="riddle-area" class="riddle-text" style="display:none;"></div>
+        <div id="game-controls">
+            <div id="autocomplete-container" class="autocomplete-container" style="display:none;">
+                <p class="instruction-text">Identify the botanical Family name below.</p>
+                <input type="text" id="answer-input" placeholder="Type 3 letters of the Family name...">
+                <div id="autocomplete-results" class="autocomplete-items"></div>
+            </div>
+            <div id="start-screen-controls"></div>
+            <button id="submit-button" style="display:none;">Submit Answer</button>
+        </div>
+        <div id="feedback-area" class="feedback-text"></div>
+
+        <div id="result-screen" style="display:none;">
+            <div id="analysing-state">
+                <p style="font-size: 1.2em; color: #555;">Analysing your answer...</p>
+            </div>
+            <div id="correct-state" style="display:none;">
+                <div class="petal-icon">🌸</div>
+                <p id="result-praise"></p>
+                <button id="next-level-button" class="control-button">Next Level ➡️</button>
+            </div>
+        </div>
+        
+        <div id="loading-overlay" style="display:none;">
+            <div class="loader-circle"></div>
+            <p>Loading Next Level...</p>
+        </div>
+    </div>
+
+    <script>
+        const DATA_URL = 'https://raw.githubusercontent.com/sureshmagnolia/floramystica/main/quests.json';
+        
+        let currentLevel = 1, isGameActive = true, score = 0, allQuests = [], plantFamilies = [];
+        const praiseMessages = [
+            "Brilliant! ✨ You've earned a Petal of Power!", "Amazing! 🌿 Another magical petal is yours!", "Incredible! 🌸 The Grand Tree accepts your offering!", "Excellent! 🌳 You retrieve a glowing petal!", "Perfect! 🌟 A Petal of Power has been won!", "Flawless! The botanical secrets are yours to command!", "Magnificent! Another guardian is bested! A petal appears!", "Your knowledge shines! You've claimed another petal! 💡", "Sublime! The essence of the flower is revealed to you! 🌺", "The shadow trembles before your skill! A petal is yours!", "A true master of flora! You've won another petal! 🍃", "The Grand Tree's roots grow stronger with your wisdom! 💪", "Stunning! The kingdom's hope is restored!", "Your connection to the flora is powerful! A petal is your reward!", "You are the champion the Garden Kingdom needs! 🏆"
+        ];
+        
+        const scoreDisplay = document.getElementById('score-display'), storyArea = document.getElementById('story-area'), riddleArea = document.getElementById('riddle-area'), gameControls = document.getElementById('game-controls'), autocompleteContainer = document.getElementById('autocomplete-container'), answerInput = document.getElementById('answer-input'), autocompleteResults = document.getElementById('autocomplete-results'), startScreenControls = document.getElementById('start-screen-controls'), submitButton = document.getElementById('submit-button'), nextLevelButton = document.getElementById('next-level-button'), feedbackArea = document.getElementById('feedback-area'), resultScreen = document.getElementById('result-screen'), analysingState = document.getElementById('analysing-state'), correctState = document.getElementById('correct-state'), resultPraise = document.getElementById('result-praise'), loadingOverlay = document.getElementById('loading-overlay');
+
+        function updateScore(newScore) { score = newScore; scoreDisplay.textContent = `Score: ${score}`; localStorage.setItem('floraMysticaScore', score); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch(DATA_URL).then(response => response.json()).then(data => {
+                allQuests = data;
+                plantFamilies = [...new Set(allQuests.map(q => q.answer))].sort();
+                initializeGameUI();
+            }).catch(error => { console.error("Failed to load quest data:", error); storyArea.innerHTML = "<h3>Error</h3><p>Could not load essential game data. Please refresh.</p>"; });
+        });
+
+        function initializeGameUI() {
+            const savedLevel = localStorage.getItem('floraMysticaLevel'), savedScore = localStorage.getItem('floraMysticaScore');
+            if (savedScore) { score = parseInt(savedScore, 10) || 0; scoreDisplay.textContent = `Score: ${score}`; }
+
+            if (savedLevel && parseInt(savedLevel, 10) > 1) {
+                currentLevel = parseInt(savedLevel, 10);
+                storyArea.innerHTML = `<h3>Welcome Back, Adventurer!</h3><p>Your quest awaits at Level ${currentLevel}.</p>`;
+                startScreenControls.innerHTML = `<button id="continue-button" class="control-button">Continue Quest</button><button id="restart-button" class="control-button">Start New Quest</button>`;
+                document.getElementById('continue-button').addEventListener('click', () => startGame(false));
+                document.getElementById('restart-button').addEventListener('click', () => startGame(true));
+            } else {
+                showMainStory();
+                startScreenControls.innerHTML = `<button id="start-button" class="control-button">I'm Ready for the Quest!</button>`;
+                document.getElementById('start-button').addEventListener('click', () => startGame(true));
+            }
+        }
+        
+        function showMainStory() {
+            storyArea.innerHTML = '<h3>The Garden Kingdom</h3><p>In a land far removed from the mundanities of our world exists the Garden Kingdom...</p><h3>The Grand Tree of Lore</h3><p>At the heart of this realm stands the Grand Tree of Lore...</p><h3>A Shadow Falls</h3><p>But not all is well in this verdant paradise...</p><h3>The Quest for the Petals of Power</h3><p>Ancient scrolls reveal that only the legendary "Petals of Power" can restore the Tree...</p><h3>A Call to Adventure</h3><p>Using the last remnants of its power, the Grand Tree sends out a call for help, and so begins your saga.</p>';
+        }
+
+        function startGame(isNewGame) {
+            if (isNewGame) { currentLevel = 1; localStorage.removeItem('floraMysticaLevel'); localStorage.removeItem('floraMysticaScore'); updateScore(0); }
+            startScreenControls.style.display = 'none';
+            fetchRiddle(currentLevel);
+        }
+
+        function fetchRiddle(level) {
+            const quest = allQuests.find(q => q.level === level);
+            if (!quest) {
+                storyArea.innerHTML = `<strong>Congratulations! You are victorious!</strong><br>With a final score of ${score}, you have saved the Garden Kingdom! 🏆`;
+                riddleArea.style.display = 'none'; gameControls.style.display = 'none';
+                startScreenControls.innerHTML = `<button id="restart-button" class="control-button">Play Again</button>`;
+                startScreenControls.style.display = 'block';
+                document.getElementById('restart-button').addEventListener('click', () => startGame(true));
+                return;
+            }
+
+            localStorage.setItem('floraMysticaLevel', level);
+            storyArea.textContent = quest.storyText;
+            riddleArea.textContent = quest.riddle;
+            gameControls.style.display = 'block';
+            riddleArea.style.display = 'block';
+            autocompleteContainer.style.display = 'inline-block';
+            submitButton.style.display = 'inline-block';
+            submitButton.disabled = false;
+            answerInput.value = '';
+            answerInput.focus();
+            feedbackArea.textContent = '';
+            isGameActive = true;
+        }
+        
+        function checkAnswer() {
+            isGameActive = false;
+            const userAnswer = answerInput.value;
+            const quest = allQuests.find(q => q.level === currentLevel);
+            if (!userAnswer || !quest) { isGameActive = true; return; }
+            
+            autocompleteResults.style.display = 'none'; riddleArea.style.display = 'none'; gameControls.style.display = 'none'; feedbackArea.style.display = 'none';
+            resultScreen.style.display = 'flex'; analysingState.style.display = 'block'; correctState.style.display = 'none';
+
+            setTimeout(() => {
+                if (userAnswer.toLowerCase().trim() === quest.answer.toLowerCase().trim()) {
+                    updateScore(score + 10);
+                    resultPraise.textContent = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
+                    currentLevel++;
+                    analysingState.style.display = 'none';
+                    correctState.style.display = 'block';
+                } else {
+                    updateScore(score - 5);
+                    resultScreen.style.display = 'none';
+                    riddleArea.style.display = 'block'; gameControls.style.display = 'block'; feedbackArea.style.display = 'block';
+                    feedbackArea.className = 'feedback-text feedback-incorrect';
+                    feedbackArea.textContent = `🤔 Not quite. Here's a hint: ${quest.hint}`;
+                    isGameActive = true;
+                    submitButton.disabled = false;
+                    answerInput.focus();
+                }
+            }, 1500);
+        }
+        
+        submitButton.addEventListener('click', () => { if (isGameActive) checkAnswer(); });
+        answerInput.addEventListener('keydown', (event) => { if (event.key === 'Enter' && isGameActive) checkAnswer(); });
+        
+        // --- MODIFIED: Event listener for "Next Level" button now includes animation ---
+        nextLevelButton.addEventListener('click', () => {
+            resultScreen.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
+            
+            // This resets the CSS animation so it can run again
+            const loader = document.querySelector('.loader-circle');
+            loader.style.animation = 'none';
+            loader.offsetHeight; // Trigger reflow
+            loader.style.animation = 'load-progress 2s linear forwards';
+
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                feedbackArea.style.display = 'block';
+                fetchRiddle(currentLevel);
+            }, 2000);
+        });
+
+        answerInput.addEventListener('input', () => {
+            const inputValue = answerInput.value; autocompleteResults.innerHTML = '';
+            if (inputValue.length < 3) { autocompleteResults.style.display = 'none'; return; }
+            const suggestions = plantFamilies.filter(f => f.toLowerCase().startsWith(inputValue.toLowerCase()));
+            if (suggestions.length > 0) {
+                suggestions.slice(0, 10).forEach(suggestion => {
+                    const item = document.createElement('div'); item.textContent = suggestion;
+                    item.addEventListener('click', () => { answerInput.value = suggestion; autocompleteResults.style.display = 'none'; });
+                    autocompleteResults.appendChild(item);
+                });
+                autocompleteResults.style.display = 'block';
+            } else { autocompleteResults.style.display = 'none'; }
+        });
+        document.addEventListener('click', (e) => { if (!autocompleteContainer.contains(e.target)) { autocompleteResults.style.display = 'none'; } });
+    </script>
+</body>
+</html>
